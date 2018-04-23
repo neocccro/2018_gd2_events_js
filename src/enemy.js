@@ -3,10 +3,12 @@ import EventEmitter from './utils/eventemitter.utils';
 class Enemy extends EventEmitter {
 
     speed = 10;
-    health = 100;
+    health;
 
-    constructor(){
+    constructor(health = 100)
+    {
         super();
+        this.health = health;
     }
 
     getDamage(damage = 5){

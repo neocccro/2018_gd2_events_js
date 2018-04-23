@@ -1,15 +1,24 @@
 import Enemy from './enemy';
 
+
+var enemyCounter = 0;
 // we maken een 'instantie' aan van de Class Enemy
-const endBoss = new Enemy();
+
+
+var currentEnemy = new Enemy(100);
 
 // vervolgens gaan we luisteren of de endBoss schreeuwt dat hij dood gaat
-endBoss.addListener('death',() => console.log('endBoss is dood. Ik zou nu iets nieuws kunnen spawnen'));
+currentEnemy.addListener('death',() => enemyDeath());
+
+function enemyDeath()
+{
+  console.log('endBoss has died. Now I can spawn something else.');
+  enemyCounter++;
+  currentEnemy = new Enemy(Math.pow(1.1,enemyCounter)*100);
+}
 
 // je mag zo vaak luisteren als je wil
-endBoss.addListener('death',() => console.log('endBoss is dood. Laten we de HUD updaten'));
+currentEnemy.addListener('death',() => console.log('endBoss has died. Lets update the HUD.'));
 
 // nu gaan we net doen of we de endBoss 3x slaan
-endBoss.getDamage(20);
-endBoss.getDamage(10);
-endBoss.getDamage(70);
+currentEnemy.getDamage(100);
